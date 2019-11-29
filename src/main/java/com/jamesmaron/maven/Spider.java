@@ -7,13 +7,26 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 public class Spider {
+	public int refactorTime = 2500;
+	int fails = 0;
 	public Document getPage(){
 		Connection connection = mask(Jsoup.connect("https://commons.wikimedia.org/wiki/Special:Random/File"));
 		try {
-			return connection.get();
+			Document con =  connection.get();
+			fails = 0;
+			return con;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			try {
+				if(fails > 2) {
+					refactorTime += 1500;
+					Runner.waitTime += 500;
+					fails = 0;
+				}
+				Thread.sleep(refactorTime);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		return null;
 	}
