@@ -8,7 +8,7 @@ import org.jsoup.nodes.Document;
 
 public class Runner {
 	static Resolutions errorRes = new Resolutions(696969, 696969);
-	static int waitTime = 1000;
+	public static int waitTime = 1000;
 
 	public static void main(String[] args) {
 		Spider spider = new Spider();
@@ -44,9 +44,9 @@ public class Runner {
 		}
 		System.out.print("---=== Done! ===---");
 		long timeElapsed = System.currentTimeMillis() - startTime;
-		System.out.println(
-				"Time Elapsed: " + timeElapsed / 1000 / 60 + " min, " + "Avg. data time: " + timeElapsed / items / 1000
-						+ " res per sec" + ", Timeout Time: " + spider.refactorTime + " " + waitTime);
+		System.out.println("Items:" + items +", Time Elapsed: " + timeElapsed / 1000 / 60 + " min, " + "Avg. data time: "
+				+ timeElapsed/ 1000 / items  + " time per item");
+		System.out.println("Timeout Time: " + spider.refactorTime + " " + waitTime);
 	}
 
 	public static Resolutions findResolutions(String rawAttribute) {

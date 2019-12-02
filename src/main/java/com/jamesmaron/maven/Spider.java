@@ -17,9 +17,10 @@ public class Spider {
 			return con;
 		} catch (IOException e) {
 			try {
+				fails += 1;
 				if(fails > 2) {
-					refactorTime += 1500;
-					Runner.waitTime += 500;
+					refactorTime = refactorTime + 200;
+					Runner.waitTime = Runner.waitTime + 100;
 					fails = 0;
 				}
 				Thread.sleep(refactorTime);
